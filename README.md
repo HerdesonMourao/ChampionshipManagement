@@ -5,12 +5,12 @@
     </h1>
 </div>
 
-<!-- ### Tecnologias utilizadas
+### Tecnologias utilizadas
 
 * Typescript
-* Postgresql
-* Prisma
-* Angular -->
+* MySQL
+* TypeORM
+* React
 
 ### Documentação 
 
@@ -35,5 +35,6 @@
 
 ### Membros
 
+* Antônio Mauricio Rodrigues Araújo Júnior
 * Cesár Rayan Soares de Sousa
 * Herdeson Rodrigues Mourão
