@@ -9,7 +9,7 @@
 
 * Typescript
 * MySQL
-* TypeORM
+* Prisma
 * React
 
 ### Documentação 
