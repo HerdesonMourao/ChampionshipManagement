@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  projeto_api:
+    build: .
+    container_name: projeto-integrador-api
+    environment:
+      - DB_HOST=projeto_mysql
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - projeto_mysql
+    restart: always
+  projeto_mysql:
+    image: mysql:5.7
+    container_name: projeto-integrador-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - ./db_data/projeto:/var/lib/mysql
+    restart: always
+networks:
+  projeto_network:
+    name: 'projeto_network'
+    driver: bridge
