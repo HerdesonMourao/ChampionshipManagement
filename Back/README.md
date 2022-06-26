@@ -21,6 +21,11 @@
 * [Repositório github](https://github.com/HerdesonMourao/ChampionshipManagement)
 * [Prototipagem da interface](https://www.figma.com/file/V1mxNbMFLM6D6DF2MS1nlj/ProjetoIntegrador1?node-id=0%3A1)
 
+### Como executar
+
+Crie um arquivo chamado `.env` utilizando como exemplo o arquivo `.env.example` e edite as configuracoes do .env de acordo com seu ambiente de desenvolvimento.
+Apos isso execute o comando `docker-compose build --no-cache` para fazer a build do docker e apois isso execute o comando `docker-compose up` para assim executar a api.
+
 <!-- ### Diagramas
 
 * [Caso de Uso](https://github.com/HerdesonMourao/ChampionshipManagement/blob/master/Docs/Diagramas/CasoDeUsoVersao01.png)
@@ -31,15 +36,6 @@
 ### Plano de contingência
 
 * [Plano de Contingência](https://github.com/HerdesonMourao/ChampionshipManagement/blob/master/Docs/Plano_de_contingencia.pdf) -->
-
-
-<!-- # Awesome Project Build with TypeORM
-
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command -->
 
 ### Membros
 
