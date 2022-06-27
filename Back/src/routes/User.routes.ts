@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UserController from "../controllers/UserController";
 import SignInController from "../controllers/SignInController";
+import UpdatePasswordController from "../controllers/UpdatePasswordController";
 
 const routes = Router();
 
@@ -11,5 +12,7 @@ routes.put('/:id', UserController.update);
 routes.delete('/:id', UserController.destroy);
 
 routes.post('/acess', SignInController.store);
+
+routes.post('/update_password/:id', UpdatePasswordController.store);
 
 export default routes;
