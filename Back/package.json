@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "prisma db push && tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
+    "start": "prisma migrate dev && tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
   },
   "repository": {
     "type": "git",

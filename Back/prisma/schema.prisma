@@ -21,5 +21,50 @@ model User {
   created_at   DateTime @default(now()) @map("created_at")
   updated_at   DateTime @updatedAt @map("updated_at")
 
+  Team_Members Team_Members[]
+
   @@map("user")
 }
+
+model Team {
+  id           Int      @id @default(autoincrement())
+  name         String
+  shield_image String?
+  abbreviation String
+  is_activated Boolean  @default(true)
+  created_at   DateTime @default(now()) @map("created_at")
+  updated_at   DateTime @updatedAt @map("updated_at")
+
+  Team_Members Team_Members[]
+
+  @@map("team")
+}
+
+model Team_Members {
+  id           Int      @id @default(autoincrement())
+  id_team      Int      @map("id_team")
+  id_player    Int      @map("id_player")
+  is_captain   Boolean
+  is_activated Boolean  @default(true)
+  created_at   DateTime @default(now()) @map("created_at")
+  updated_at   DateTime @updatedAt @map("updated_at")
+
+  id_teams Team @relation(fields: [id_team], references: [id])
+  id_users User @relation(fields: [id_player], references: [id])
+
+  @@map("team_members")
+}
+
+// model Match {
+//   id         Int      @id @default(autoincrement())
+//   date       DateTime @db.Date
+//   time       DateTime @db.Time()
+//   place      String
+//   id_team_a  Int      @map("id_team_a")
+//   id_team_b  Int      @map("id_team_b")
+//   scoreboard String
+
+//   id_team Team @relation(fields: [id_team_a], references: [id])
+
+//   @@map("match")
+// }
