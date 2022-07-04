@@ -53,6 +53,13 @@ class UserController {
       const listUsers = await prismaClient.user.findMany({
         where: {
           is_activated: true
+        },
+        include: {
+          Tournament: {
+            where: {
+              is_activated: true
+            }
+          }
         }
       });
 
@@ -73,6 +80,13 @@ class UserController {
         where: {
           id: Number(id),
           is_activated: true
+        },
+        include: {
+          Tournament: {
+            where: {
+              is_activated: true
+            }
+          }
         }
       });
 
