@@ -22,6 +22,7 @@ model User {
   updated_at   DateTime @updatedAt @map("updated_at")
 
   Team_Members Team_Members[]
+  Tournament Tournament[]
 
   @@map("user")
 }
@@ -53,6 +54,24 @@ model Team_Members {
   id_users User @relation(fields: [id_player], references: [id])
 
   @@map("team_members")
+}
+
+model Tournament {
+  id           Int      @id @default(autoincrement())
+  created_by   Int      @map("created_by")
+  name         String
+  description  String
+  number_teams Int
+  awards       Decimal @db.Decimal(65, 2)
+  sport        String
+  type         String
+  is_activated Boolean  @default(true)
+  created_at   DateTime @default(now()) @map("created_at")
+  updated_at   DateTime @updatedAt @map("updated_at")
+
+  id_users User @relation(fields: [created_by], references: [id])
+
+  @@map("tournament")
 }
 
 // model Match {
