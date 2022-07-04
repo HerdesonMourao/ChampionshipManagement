@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum StatusTypes {
+  ABERTO
+  EM_ANDAMENTO
+  CONCLUIDO
+  CANCELADO
+
+  @@map("status_types")
+}
+
 model User {
   id           Int      @id @default(autoincrement())
   name         String
@@ -22,7 +31,7 @@ model User {
   updated_at   DateTime @updatedAt @map("updated_at")
 
   Team_Members Team_Members[]
-  Tournament Tournament[]
+  Tournament   Tournament[]
 
   @@map("user")
 }
@@ -57,17 +66,18 @@ model Team_Members {
 }
 
 model Tournament {
-  id           Int      @id @default(autoincrement())
-  created_by   Int      @map("created_by")
+  id           Int         @id @default(autoincrement())
+  created_by   Int         @map("created_by")
   name         String
   description  String
   number_teams Int
-  awards       Decimal @db.Decimal(65, 2)
+  awards       Decimal     @db.Decimal(65, 2)
   sport        String
   type         String
-  is_activated Boolean  @default(true)
-  created_at   DateTime @default(now()) @map("created_at")
-  updated_at   DateTime @updatedAt @map("updated_at")
+  status       StatusTypes
+  is_activated Boolean     @default(true)
+  created_at   DateTime    @default(now()) @map("created_at")
+  updated_at   DateTime    @updatedAt @map("updated_at")
 
   id_users User @relation(fields: [created_by], references: [id])
 

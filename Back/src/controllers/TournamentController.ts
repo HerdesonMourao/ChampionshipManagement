@@ -24,7 +24,8 @@ class TournamentController {
         number_teams,
         awards,
         sport,
-        type
+        type,
+        status
       }: CreateTournamentDTO = request.body;
 
       const verifyUser = await prismaClient.user.findFirst({
@@ -46,7 +47,8 @@ class TournamentController {
           number_teams: Number(number_teams),
           awards: new Prisma.Decimal(awards),
           sport,
-          type
+          type,
+          status
         }
       });
 
@@ -123,7 +125,8 @@ class TournamentController {
         number_teams,
         awards,
         sport,
-        type
+        type,
+        status
       }: UpdateTournamentDTO = request.body;
 
       const searchTournament = await prismaClient.tournament.findFirst({
@@ -149,7 +152,8 @@ class TournamentController {
           number_teams,
           awards,
           sport,
-          type
+          type,
+          status
         }
       });
 
