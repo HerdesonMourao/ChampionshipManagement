@@ -7,6 +7,13 @@ enum StatusTypes {
   CANCELADO = 'CANCELADO'
 }
 
+enum TeamMemberStatusTypes {
+  INSCRITO = 'INSCRITO',
+  EM_ANALISE = 'EM_ANALISE',
+  RECUSADO = 'RECUSADO',
+  ELIMINADO = 'ELIMINADO'
+}
+
 export interface CreateTournamentDTO {
   created_by: number;
   name: string;
@@ -26,6 +33,18 @@ export interface UpdateTournamentDTO {
   sport: string;
   type: string;
   status: StatusTypes;
+}
+
+export interface CreateTournamentMemberDTO {
+  id_tournament: number;
+  id_team: number;
+  status: TeamMemberStatusTypes;
+}
+
+export interface UpdateTournamentMemberDTO {
+  id_tournament: number;
+  id_team: number;
+  status: TeamMemberStatusTypes;
 }
 
 export const createTournamentRequestSchema = yup.object({
@@ -53,4 +72,22 @@ export const updateTournamentRequestSchema = yup.object({
     .string()
     .oneOf([StatusTypes.ABERTO, StatusTypes.EM_ANDAMENTO, StatusTypes.CONCLUIDO, StatusTypes.CANCELADO])
     .required(),
+})
+
+export const createTournamentMemberRequestSchema = yup.object({
+  id_tournament: yup.number().required(),
+  id_team: yup.number().required(),
+  status: yup
+    .string()
+    .oneOf([TeamMemberStatusTypes.INSCRITO, TeamMemberStatusTypes.EM_ANALISE, TeamMemberStatusTypes.RECUSADO, TeamMemberStatusTypes.ELIMINADO])
+    .required()
+})
+
+export const updateTournamentMemberRequestSchema = yup.object({
+  id_tournament: yup.number().required(),
+  id_team: yup.number().required(),
+  status: yup
+    .string()
+    .oneOf([TeamMemberStatusTypes.INSCRITO, TeamMemberStatusTypes.EM_ANALISE, TeamMemberStatusTypes.RECUSADO, TeamMemberStatusTypes.ELIMINADO])
+    .required()
 })
