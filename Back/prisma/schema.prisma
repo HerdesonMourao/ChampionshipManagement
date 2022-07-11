@@ -19,6 +19,15 @@ enum StatusTypes {
   @@map("status_types")
 }
 
+enum TeamMemberStatusTypes {
+  INSCRITO
+  EM_ANALISE
+  RECUSADO
+  ELIMINADO
+
+  @@map("team_member_status_types")
+}
+
 model User {
   id           Int      @id @default(autoincrement())
   name         String
@@ -30,8 +39,9 @@ model User {
   created_at   DateTime @default(now()) @map("created_at")
   updated_at   DateTime @updatedAt @map("updated_at")
 
-  Team_Members Team_Members[]
-  Tournament   Tournament[]
+  Team_Members       Team_Members[]
+  Tournament         Tournament[]
+  ScoringMomentMatch ScoringMomentMatch[]
 
   @@map("user")
 }
@@ -45,7 +55,8 @@ model Team {
   created_at   DateTime @default(now()) @map("created_at")
   updated_at   DateTime @updatedAt @map("updated_at")
 
-  Team_Members Team_Members[]
+  Team_Members       Team_Members[]
+  Tournament_Members Tournament_Members[]
 
   @@map("team")
 }
@@ -81,19 +92,56 @@ model Tournament {
 
   id_users User @relation(fields: [created_by], references: [id])
 
+  Tournament_Members Tournament_Members[]
+  Match              Match[]
+
   @@map("tournament")
 }
 
-// model Match {
-//   id         Int      @id @default(autoincrement())
-//   date       DateTime @db.Date
-//   time       DateTime @db.Time()
-//   place      String
-//   id_team_a  Int      @map("id_team_a")
-//   id_team_b  Int      @map("id_team_b")
-//   scoreboard String
+model Tournament_Members {
+  id            Int                   @id @default(autoincrement())
+  id_tournament Int                   @map("id_tournament")
+  id_team       Int                   @map("id_team")
+  status        TeamMemberStatusTypes
+  is_activated  Boolean               @default(true)
+  created_at    DateTime              @default(now()) @map("created_at")
+  updated_at    DateTime              @updatedAt @map("updated_at")
 
-//   id_team Team @relation(fields: [id_team_a], references: [id])
+  id_tournaments Tournament @relation(fields: [id_tournament], references: [id])
+  id_teams       Team       @relation(fields: [id_team], references: [id])
 
-//   @@map("match")
-// }
+  @@map("tournament_members")
+}
+
+model Match {
+  id            Int      @id @default(autoincrement())
+  id_tournament Int      @map("id_tournament")
+  date          DateTime @db.Date
+  time          DateTime @db.Time()
+  place         String
+  id_team_a     Int      @map("id_team_a")
+  id_team_b     Int      @map("id_team_b")
+  scoreboard    String
+  is_activated  Boolean  @default(true)
+  created_at    DateTime @default(now()) @map("created_at")
+  updated_at    DateTime @updatedAt @map("updated_at")
+
+  id_tournaments Tournament @relation(fields: [id_tournament], references: [id])
+
+  ScoringMomentMatch ScoringMomentMatch[]
+
+  @@map("match")
+}
+
+model ScoringMomentMatch {
+  id           Int      @id @default(autoincrement())
+  id_match     Int      @map("id_match")
+  id_player    Int      @map("id_player")
+  time         DateTime @db.Time()
+  is_activated Boolean  @default(true)
+  created_at   DateTime @default(now()) @map("created_at")
+  updated_at   DateTime @updatedAt @map("updated_at")
+
+  id_users  User  @relation(fields: [id_player], references: [id])
+  id_matchs Match @relation(fields: [id_match], references: [id])
+}
