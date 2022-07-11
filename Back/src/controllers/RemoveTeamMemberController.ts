@@ -4,7 +4,9 @@ import { prismaClient } from "../database";
 class RemoveTeamMemberController {
   public async store(request: Request, response: Response){
     try {
-      const { id, id_team } = request.query;
+      const { id } = request.params;
+
+      const { id_team } = request.body;
 
       const removeMember = await prismaClient.team_Members.findFirst({
         where: {
