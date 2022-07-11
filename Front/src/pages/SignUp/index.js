@@ -9,10 +9,10 @@ class SignUp extends Component {
     username: "",
     email: "",
     password: "",
-    error: ""
+    error: "",
   };
 
-  handleSignUp = async e => {
+  handleSignUp = async (e) => {
     e.preventDefault();
     const { username, email, password } = this.state;
     if (!username || !email || !password) {
@@ -32,26 +32,26 @@ class SignUp extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSignUp}>
-        <img src={Logo} alt="logo main" />
+          <img src={Logo} alt="logo main" />
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
             placeholder="Nome de usuário"
-            onChange={e => this.setState({ username: e.target.value })}
+            onChange={(e) => this.setState({ username: e.target.value })}
           />
           <input
             type="email"
             placeholder="Endereço de e-mail"
-            onChange={e => this.setState({ email: e.target.value })}
+            onChange={(e) => this.setState({ email: e.target.value })}
           />
           <input
             type="password"
             placeholder="Senha"
-            onChange={e => this.setState({ password: e.target.value })}
+            onChange={(e) => this.setState({ password: e.target.value })}
           />
           <button type="submit">Cadastrar grátis</button>
           <hr />
-          <Link to="/">Fazer login</Link>
+          <Link to="/signIn">Fazer login</Link>
         </Form>
       </Container>
     );

@@ -1,0 +1,16 @@
+header.header {
+    background-color: black;
+    padding: 0px 35px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+header.header h1 {
+    font-size: 1.8em;
+}
+
+header.header i {
+    padding-right: 10px;
+}
